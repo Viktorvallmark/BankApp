@@ -25,14 +25,26 @@ public class Customer {
 
 
     //Behaviour
-    //TODO
+
 
     public String closeAccount(long pNr, int accountId){
         AccountList.removeIf(i -> i.getAccountID() == accountId && i.getPNr() == pNr);
         return "Account with account number"+ accountId+"was removed. Balance";
     }
+
+    public int getAccountIndex(int accountId){
+        int accIndex = -1;
+        for(var account : AccountList){
+            if(account.getAccountID() == accountId){
+                accIndex = AccountList.indexOf(account);
+            }
+
+        }
+    return accIndex;
+    }
     //TODO
     public String getAccount(long pNr, int accountId){
+        String temp = "";
 
 
 

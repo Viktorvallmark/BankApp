@@ -13,7 +13,7 @@ public class Main {
     }
 
 /*    public static void ReadFileAndInstantiateObjects(Bank bank) throws FileNotFoundException {
-        File file = new File("C:\\Users\\rafae\\IdeaProjects\\SomeApp\\src\\com\\grit\\students.txt");
+        File file = new File("");
         Scanner scanner = new Scanner(file);
         while(scanner.hasNextLine()){
             var line = scanner.nextLine();

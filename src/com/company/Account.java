@@ -23,12 +23,6 @@ public class Account {
 
 
     //Behaviour
-    //TODO
-    public String getAccount(long pNr, int accountId){
-
-
-        return "";
-    }
 
     public double getBalance() {
         return Balance;
@@ -45,7 +39,9 @@ public class Account {
     public long getPNr() {
         return PNr;
     }
+
     //TODO
+
     public boolean withdrawMoney(long pNr, int accountId, double amount){
         double k = Balance - amount;
         if(k < 0){
@@ -60,6 +56,7 @@ public class Account {
 
     }
     //TODO
+
     public boolean depositMoney(long pNr, int accountId, int amount){
         if(getPNr() == pNr && getAccountID() == accountId){
             Balance += amount;
@@ -71,8 +68,4 @@ public class Account {
         }
 
     }
-
-
-
-
 }
