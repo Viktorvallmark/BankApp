@@ -1,8 +1,10 @@
 package com.company;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class Bank {
 
@@ -63,32 +65,42 @@ public class Bank {
         }
         return tempList;
     }
-    //TODO
-    public boolean ChangeCustomerName(String name, long pNr){
-        for(Customer i : CustomerList){
-            if(i.getPNr() == pNr){
-                var k = i.getFullName();
-                k = name;
-                CustomerList.add(k);
-                return true;
-            }
 
+    public boolean ChangeCustomerName(String name, long pNr){
+        var custIndex = getCustomerIndex(pNr);
+        if(custIndex != -1){
+            var customer = CustomerList.get(custIndex);
+            var custName = customer.getFullName();
+            var custpNr = customer.getPNr();
+            var custAccList = customer.getAccountList();
+            custName = name;
+            Customer customernew = new Customer(custpNr, name);
+            return true;
+        }else{
+            return false;
         }
-        return false;
     }
+
     public List<Customer> getCustomerList(){
         return CustomerList;
     }
-    //TODO
+
     public List<String> RemoveCustomer(long pNr){
         List<String> temp = new ArrayList<>();
         var isTrue = getCustomerIndex(pNr);
         if(isTrue != -1){
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Enter AccountID:");
+            var accID = sc.nextInt();
             var customer = CustomerList.get(isTrue);
+            var accIndex = customer.getAccountIndex(accID);
+            var accList = customer.getAccountList();
+            var acc = accList.get(accIndex);
+            var accBalance = acc.getBalance();
             temp.add("Customer name:" + customer.getFullName());
             temp.add("Customer's personal number:"+ String.valueOf(customer.getPNr()));
             temp.add("Total accounts:" + String.valueOf(customer.getAccountList().size()));
-            temp.add("Total balance returned to" + pNr + ":" + String.valueOf(customer.));
+            temp.add("Total balance returned to" + pNr + ":" + String.valueOf(accBalance));
             CustomerList.remove(customer);
 
         }
@@ -105,5 +117,17 @@ public class Bank {
             }
             }
             return -1;
+    }
+
+    public void writeCustomersToTxt(){
+        try {
+            FileWriter myWriter = new FileWriter("customerinfo.txt");
+            myWriter.write(String.valueOf(CustomerList));
+            myWriter.close();
+            System.out.println("Successfully wrote to file");
+        } catch (IOException e) {
+            System.out.println("Error occured while writing to file.");
+            e.printStackTrace();
+        }
     }
 }
